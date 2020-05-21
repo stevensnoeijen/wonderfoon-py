@@ -1,0 +1,9 @@
+{
+	"Serial": 0,
+	"DialerType":"keypad2",
+	"HookGpio":16,
+	"PadRowGpios":[6,13,19,26],
+	"PadColGpios":[12,20,21],
+	"HookPower": "Ground",
+	"HookLogic": false 
+}

@@ -1,0 +1,15 @@
+#/bin/bash
+
+cd /home/pi/wonderfoond
+
+./newstuff.sh
+
+while true
+do
+	./t65
+	sleep 2
+done
+
+
+
+

@@ -1,0 +1,9 @@
+{
+	"Serial": 0,
+	"DialerType":"rotator2",
+	"HookGpio":16,
+	"HookPower": "Ground",
+	"HookLogic": true,
+	"DialerYellowGpio": 26,
+	"DialerRedGpio": 19
+}
