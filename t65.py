@@ -38,6 +38,9 @@ class T65:
 
     def onHook(self):
         print('on hook')
+        if self.playingMusic: # stop music if playing
+            self.playingMusic.stop()
+            del self.playingMusic
         self.unhooked = False
 
     def playDailTone(self):
@@ -48,7 +51,7 @@ class T65:
                 time.sleep(1)
                 continue
 
-            if self.playingMusic or self.rotator.isDailing:
+            if (self.playingMusic and self.playingMusic.is_playing) or self.rotator.isDailing:
                 time.sleep(.5)
                 continue
 
@@ -60,6 +63,9 @@ class T65:
         self.unhooked = True
 
     def dailed(self, number):
+        if self.playingMusic and self.playingMusic.is_playing: # when song is playing
+            return # do nothing
+
         # TODO: add multi type support
         self.playMusic(str(number) + '.wav')
 
@@ -70,8 +76,6 @@ class T65:
 
         music = sa.WaveObject.from_wave_file('music/' + song)
         self.playingMusic = music.play()
-        self.playingMusic.wait_done()
-        del self.playingMusic
 
 
 if __name__ == "__main__": 
