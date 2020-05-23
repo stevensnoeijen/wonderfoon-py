@@ -5,17 +5,28 @@ from signal import pause
 import simpleaudio as sa
 import time
 import threading
+import json
 from rotator import Rotator
 
 class T65:
+    HOOK_PIN_DEFAULT = 16
+    DAILER_STEP_PIN_DEFAULT = 19
+    DAILER_ISON_PIN_DEFAULT = 26
+
     unhooked = False
     playingMusic = None
 
     def run(self):
-        self.rotator = Rotator()
+        with open('config.json') as json_file:
+            self.config = json.load(json_file)
+
+        self.rotator = Rotator(
+            self.config.get('DialerRedGpio', self.DAILER_STEP_PIN_DEFAULT),
+            self.config.get('DialerYellowGpio', self.DAILER_ISON_PIN_DEFAULT)
+        )
         self.rotator.when_dailed = self.dailed
 
-        self.hook = gpiozero.Button(16) # TODO: replace with config
+        self.hook = gpiozero.Button(self.config.get('HookGpio', self.HOOK_PIN_DEFAULT))
         self.hook.when_released = self.offHook
         self.hook.when_pressed = self.onHook
         if not self.hook.is_pressed: # start offHook when it's already of the hook
@@ -35,6 +46,7 @@ class T65:
         while(True):
             if not self.unhooked:
                 time.sleep(1)
+                continue
 
             if self.playingMusic or self.rotator.isDailing:
                 time.sleep(.5)
@@ -48,6 +60,7 @@ class T65:
         self.unhooked = True
 
     def dailed(self, number):
+        # TODO: add multi type support
         self.playMusic(str(number) + '.wav')
 
     def playMusic(self, song):

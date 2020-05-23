@@ -33,4 +33,6 @@ Op de pi loopt een script om het python script te herstarten als het bestand wor
 
 `while inotifywait -e close_write t65.py; do python3 ./t65.py; done`
 
+Alleen rotator is geimplementeerd atm.
+
 > install https://github.com/inotify-tools/inotify-tools/wiki

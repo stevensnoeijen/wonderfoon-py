@@ -6,11 +6,11 @@ class Rotator:
     lastNumber = -1
     __when_dailed = ...
 
-    def __init__(self):
-        self.step = gpiozero.Button(19) # TODO: replace with config
+    def __init__(self, stepPin, isonPin):
+        self.step = gpiozero.Button(stepPin)
         self.step.when_pressed = self.step_pressed
 
-        self.ison = gpiozero.Button(26) # TODO: replace with config
+        self.ison = gpiozero.Button(isonPin)
         self.ison.when_pressed = self.ison_pressed
         self.ison.when_released = self.ison_released
     
