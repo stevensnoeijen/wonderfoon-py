@@ -27,10 +27,10 @@ class Sound:
         return self.__playing
 
     def pause(self):
-        self.__pause = False
+        self.__pause = True
 
     def unpause(self):
-        self.__pause = True
+        self.__pause = False
 
     def _play(self):
         self.__playing = True
@@ -56,7 +56,7 @@ class Sound:
                 else:
                     break
             
-            if not self.__pause:
+            if self.__pause:
                 time.sleep(.5)
                 continue
 
