@@ -17,7 +17,7 @@ class Sound:
 
     def play(self):
         self.__playing = True
-        self.__thread = threading.Thread(target=self._play)
+        self.__thread = threading.Thread(target=self.__play)
         self.__thread.start()
     
     def stop(self):
@@ -32,7 +32,7 @@ class Sound:
     def unpause(self):
         self.__pause = False
 
-    def _play(self):
+    def __play(self):
         self.__playing = True
         wf = wave.open(self.file, 'rb')
 
@@ -47,29 +47,30 @@ class Sound:
         # read frame
         data = wf.readframes(Sound.CHUNK)
 
-        # play stream
-        while self.__playing:
-            if len(data) == 0:
-                # when end of sound
-                if self.repeat:
-                    wf.rewind()
-                else:
-                    break
-            
-            if self.__pause:
-                time.sleep(.5)
-                continue
+        try:
+            # play stream
+            while self.__playing:
+                if len(data) == 0:
+                    # when end of sound
+                    if self.repeat:
+                        wf.rewind()
+                    else:
+                        break
+                
+                if self.__pause:
+                    time.sleep(.5)
+                    continue
 
-            stream.write(data)
-            # read next frame
-            data = wf.readframes(Sound.CHUNK)
+                stream.write(data)
+                # read next frame
+                data = wf.readframes(Sound.CHUNK)
+        finally:
+            # stop stream
+            stream.stop_stream()
+            stream.close()
 
-        # stop stream (4)
-        stream.stop_stream()
-        stream.close()
-
-        # close PyAudio (5)
-        p.terminate()
+            # close PyAudio
+            p.terminate()
     
     def wait_done(self):
         self.__thread.join()

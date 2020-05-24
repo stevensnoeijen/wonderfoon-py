@@ -38,4 +38,12 @@ Alleen wav 16bit is op het moment geimplementeerd.
 
 > install https://github.com/inotify-tools/inotify-tools/wiki
 
-Todo: check nummer 7
+Todo: 
+
+- play dailtone when song is done
+- check nummer 7 (mono)
+- check error dailtone
+- implement volume.json
+- implement music.json
+- maak install manual
+- cleanup
