@@ -3,6 +3,7 @@ from signal import pause
 import time
 import threading
 import json
+import signal
 from rotator import Rotator
 from sound import Sound
 
@@ -15,7 +16,10 @@ class T65:
     DAILER_STEP_PIN_DEFAULT = 19
     DAILER_ISON_PIN_DEFAULT = 26
 
+    config = None
     __dailTone = None
+    rotator = None
+    hook = None
     __playingMusic = None
     unhooked = False
 
@@ -39,8 +43,8 @@ class T65:
         print('t65 started')
         if not self.hook.is_pressed: # start offHook when it's already of the hook
             self.offHook()
-        threading.Thread(target=self.__mainLoop).start()
-        pause()
+
+        self.__mainLoop()
 
     def __mainLoop(self):
         while True:
@@ -89,4 +93,4 @@ class T65:
 
 if __name__ == "__main__":
     t65 = T65()
-    t65.run() 
+    t65.run()
