@@ -26,7 +26,7 @@ class Rotator:
             return
 
         self.isDailing = False
-        self.lastNumber = self.count
+        self.lastNumber = 0 if self.count == 10 else self.count # because dailing 10 is acctually 0 (last number)
         self.count = -1 # reset counter
         self.dailed(self.lastNumber)
 

@@ -16,7 +16,9 @@ class T65:
     DAILER_STEP_PIN_DEFAULT = 19
     DAILER_ISON_PIN_DEFAULT = 26
 
-    config = None
+    config = {}
+    musicConfig = {}
+
     __dailTone = None
     rotator = None
     hook = None
@@ -26,6 +28,8 @@ class T65:
     def run(self):
         with open('config.json') as json_file:
             self.config = json.load(json_file)
+        with open('music.json') as json_file:
+            self.musicConfig = json.load(json_file)
 
         self.__dailTone = Sound('./music/kiestoon-2s.wav')
         self.__dailTone.repeat = True
@@ -74,9 +78,7 @@ class T65:
         if self.__dailTone.isPlaying():
             self.__dailTone.stop()
 
-        # TODO: get from config.json
-        # TODO: add multi type support
-        song = str(number) + '.wav'
+        song = self.musicConfig[number]
         self.playMusic(song)
 
     def playMusic(self, song):

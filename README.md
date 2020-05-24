@@ -40,11 +40,8 @@ Alleen wav 16bit is op het moment geimplementeerd.
 
 Todo: 
 
-- play dailtone when song is done
-- check nummer 7 (mono)
 - check error dailtone
 - implement volume.json
-- implement music.json
 - remove start message?
 - maak install manual
 - cleanup

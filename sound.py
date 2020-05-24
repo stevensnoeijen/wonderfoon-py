@@ -3,7 +3,10 @@ import wave
 import threading
 import time
 
-
+# hacky solution, but in this way the console will only print the error once
+p = pyaudio.PyAudio()
+for ii in range(p.get_device_count()):
+    p.get_device_info_by_index(ii)
 
 class Sound:
     CHUNK = 1024
@@ -18,6 +21,9 @@ class Sound:
         self.file = file
 
     def play(self):
+        if self.__thread and self.__thread.isAlive():
+            self.__thread.join() # first finish previous thread before starting a new one
+
         self.__thread = threading.Thread(target=self.__play)
         self.__thread.start()
     
@@ -38,6 +44,7 @@ class Sound:
 
     def __play(self):
         self.__playing = True
+        # TODO: add multi type support
         wf = wave.open(self.file, 'rb')
         p = pyaudio.PyAudio()
 
