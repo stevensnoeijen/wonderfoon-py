@@ -45,5 +45,6 @@ Todo:
 - check error dailtone
 - implement volume.json
 - implement music.json
+- remove start message?
 - maak install manual
 - cleanup

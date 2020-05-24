@@ -3,6 +3,8 @@ import wave
 import threading
 import time
 
+
+
 class Sound:
     CHUNK = 1024
     
@@ -16,7 +18,6 @@ class Sound:
         self.file = file
 
     def play(self):
-        self.__playing = True
         self.__thread = threading.Thread(target=self.__play)
         self.__thread.start()
     
@@ -32,10 +33,12 @@ class Sound:
     def unpause(self):
         self.__pause = False
 
+    def isPaused(self):
+        return self.__pause
+
     def __play(self):
         self.__playing = True
         wf = wave.open(self.file, 'rb')
-
         p = pyaudio.PyAudio()
 
         # open stream
@@ -68,9 +71,8 @@ class Sound:
             # stop stream
             stream.stop_stream()
             stream.close()
-
-            # close PyAudio
             p.terminate()
+            self.__playing = False
     
     def wait_done(self):
         self.__thread.join()

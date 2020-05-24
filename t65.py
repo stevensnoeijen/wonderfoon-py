@@ -42,14 +42,23 @@ class T65:
         print('t65 started')
         if not self.hook.is_pressed: # start offHook when it's already of the hook
             self.offHook()
+        threading.Thread(target=self.__mainLoop).start()
         pause()
+
+    def __mainLoop(self):
+        while True:
+            if self.__playingMusic and not self.__playingMusic.isPlaying():
+                del self.__playingMusic
+                if not self.__dailTone.isPlaying():
+                    self.__dailTone.play()
+            if self.rotator.isDailing and self.__dailTone.isPlaying():
+                self.__dailTone.stop()
+
+            time.sleep(1)
 
     def onHook(self):
         print('on hook')
-        if self.__playingMusic: # stop music if playing
-            self.__playingMusic.stop()
-            del self.__playingMusic
-        self.unhooked = False
+        self.stopMusic()
         self.__dailTone.stop()
 
     def offHook(self):
@@ -66,7 +75,8 @@ class T65:
 
         # TODO: get from config.json
         # TODO: add multi type support
-        self.playMusic(str(number) + '.wav')
+        song = str(number) + '.wav'
+        threading.Thread(target=self.playMusic, args=[song]).start()
 
     def playMusic(self, song):
         if self.__playingMusic:
@@ -74,7 +84,12 @@ class T65:
 
         self.__playingMusic = Sound('music/' + song)
         self.__playingMusic.play()
-
+        self.__playingMusic.wait_done()
+    
+    def stopMusic(self):
+        if self.__playingMusic: # stop music if playing
+            self.__playingMusic.stop()
+            del self.__playingMusic
 
 if __name__ == "__main__":
     t65 = T65()
