@@ -1,8 +1,5 @@
-from pydub import AudioSegment
-from pydub.playback import play
 import gpiozero
 from signal import pause
-import simpleaudio as sa
 import time
 import threading
 import json
@@ -76,7 +73,7 @@ class T65:
         # TODO: get from config.json
         # TODO: add multi type support
         song = str(number) + '.wav'
-        threading.Thread(target=self.playMusic, args=[song]).start()
+        self.playMusic(song)
 
     def playMusic(self, song):
         if self.__playingMusic:
@@ -84,7 +81,6 @@ class T65:
 
         self.__playingMusic = Sound('music/' + song)
         self.__playingMusic.play()
-        self.__playingMusic.wait_done()
     
     def stopMusic(self):
         if self.__playingMusic: # stop music if playing
