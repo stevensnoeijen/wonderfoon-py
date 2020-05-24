@@ -40,8 +40,9 @@ Alleen wav 16bit is op het moment geimplementeerd.
 
 Todo: 
 
-- check error dailtone
 - implement volume.json
+- check cpu usage
 - remove start message?
+- update startup script
 - maak install manual
-- cleanup
+- implement mp3 & ogg

@@ -46,10 +46,10 @@ class Sound:
         self.__playing = True
         # TODO: add multi type support
         wf = wave.open(self.file, 'rb')
-        p = pyaudio.PyAudio()
+        audio = pyaudio.PyAudio()
 
         # open stream
-        stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+        stream = audio.open(format=audio.get_format_from_width(wf.getsampwidth()),
                         channels=wf.getnchannels(),
                         rate=wf.getframerate(),
                         output=True)
@@ -78,7 +78,7 @@ class Sound:
             # stop stream
             stream.stop_stream()
             stream.close()
-            p.terminate()
+            audio.terminate()
             self.__playing = False
     
     def wait_done(self):
