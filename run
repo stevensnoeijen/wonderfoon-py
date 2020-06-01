@@ -6,7 +6,7 @@ cd /home/pi/wonderfoond
 
 while true
 do
-	./t65
+	python3 ./t65.py
 	sleep 2
 done
 

@@ -1,15 +1,11 @@
 import gpiozero
-from signal import pause
 import time
 import threading
 import json
-import signal
+import subprocess
 from rotator import Rotator
 from sound import Sound
-
-import faulthandler
-faulthandler.enable()
-PYTHONFAULTHANDLER = 1
+import pyaudio
 
 class T65:
     HOOK_PIN_DEFAULT = 16
@@ -30,8 +26,16 @@ class T65:
             self.config = json.load(json_file)
         with open('music.json') as json_file:
             self.musicConfig = json.load(json_file)
+        # with open('volume.json') as json_file:
+        #     volume = json.load(json_file)
+        #     subprocess.call(["python3", "./vol.py", volume.get('Volume')])
 
-        self.__dailTone = Sound('./music/kiestoon-2s.wav')
+        self.audio = pyaudio.PyAudio()
+        # hacky solution, but in this way the console will only print the error once
+        for ii in range(self.audio.get_device_count()):
+            self.audio.get_device_info_by_index(ii)
+
+        self.__dailTone = Sound(self.audio, './music/kiestoon-2s.wav')
         self.__dailTone.repeat = True
 
         self.rotator = Rotator(
@@ -85,7 +89,7 @@ class T65:
         if self.__playingMusic:
             self.__playingMusic.stop()
 
-        self.__playingMusic = Sound('music/' + song)
+        self.__playingMusic = Sound(self.audio, 'music/' + song)
         self.__playingMusic.play()
     
     def stopMusic(self):

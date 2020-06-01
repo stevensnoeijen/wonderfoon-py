@@ -42,6 +42,7 @@ Todo:
 
 - implement volume.json
 - check cpu usage
+- test pulling power-cable
 - remove start message?
 - update startup script
 - maak install manual
