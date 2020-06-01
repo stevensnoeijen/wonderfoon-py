@@ -1,10 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3.7
 
-import alsaaudio
+import subprocess
 import sys
 
-v = int(sys.argv[1])
+v = sys.argv[1]
 
-m = alsaaudio.Mixer("PCM")
-current_volume = m.getvolume() # Get the current Volume
-m.setvolume(v) # Set the volume to %.
+subprocess.call(["amixer", "sset", "Speaker", v + "%"])

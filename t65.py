@@ -1,3 +1,5 @@
+#!/usr/bin/python3.7
+
 import gpiozero
 import time
 import threading
@@ -22,13 +24,7 @@ class T65:
     unhooked = False
 
     def run(self):
-        with open('config.json') as json_file:
-            self.config = json.load(json_file)
-        with open('music.json') as json_file:
-            self.musicConfig = json.load(json_file)
-        # with open('volume.json') as json_file:
-        #     volume = json.load(json_file)
-        #     subprocess.call(["python3", "./vol.py", volume.get('Volume')])
+        self.__loadConfigs()
 
         self.audio = pyaudio.PyAudio()
         # hacky solution, but in this way the console will only print the error once
@@ -53,6 +49,16 @@ class T65:
             self.offHook()
 
         self.__mainLoop()
+
+    def __loadConfigs(self):
+        with open('config.json') as json_file:
+            self.config = json.load(json_file)
+        with open('music.json') as json_file:
+            self.musicConfig = json.load(json_file)
+        # load and set volume level
+        with open('volume.json') as json_file:
+            volume = json.load(json_file)
+            subprocess.call(["python3", "./vol.py", volume.get('Volume')])
 
     def __mainLoop(self):
         while True:
