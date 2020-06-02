@@ -40,7 +40,6 @@ class Sound:
 
     def __play(self):
         self.__playing = True
-        # TODO: add multi type support
         wf = wave.open(self.file, 'rb')
 
         # open stream

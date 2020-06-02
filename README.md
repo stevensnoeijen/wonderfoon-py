@@ -55,7 +55,7 @@ Sluit het af door ctrl+c.
 
 8. Automatisch starten van de applicatie bij het starten van de pi, open `sudo nano /etc/rc.local`.
 
-Voer boven de `exit 0` het volgende stukje code toe `rm -f nohup.out; nohup /home/pi/wonderfoond/run &`. 
+Voer boven de `exit 0` het volgende stukje code toe `rm -f nohup.out; nohup /home/pi/wonderfoond-py/run &`. 
 Dit zorgt ervoor dat het script `run` word uitgevoerd bij het starten van de pi.
 
 
@@ -78,8 +78,8 @@ Getest op rasberry pi zero 1.3.
 
 Todo: 
 
-- test pulling power-cable
-- update startup script
+- test usb met nieuwe muziek en json's
+- gebruikershandleiding maken 
 - test handmatige installatie
 - maak automatische installatie script
 - implement mp3 & ogg

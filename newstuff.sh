@@ -2,13 +2,14 @@
 
 
 mount /dev/sda /mnt || mount /dev/sda1 /mnt || exit 0
-for f in newstuff.sh action.json music.json t65 run volume.json config.json
+for f in action.json music.json volume.json config.json
 do
-	cp /mnt/$f /home/pi/wonderfoond
+	cp /mnt/$f /home/pi/wonderfoond-py
 done
-cp /mnt/*.wav /home/pi/wonderfoond/music
-cp /mnt/*.ogg /home/pi/wonderfoond/music
-cp /mnt/*.mp3 /home/pi/wonderfoond/music
+cp /mnt/*.wav /home/pi/wonderfoond-py/music
+# not supported for now
+# cp /mnt/*.ogg /home/pi/wonderfoond/music
+# cp /mnt/*.mp3 /home/pi/wonderfoond/music
 
 wifi=0
 if test -f /mnt/wpa_supplicant.conf
