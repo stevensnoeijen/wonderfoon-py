@@ -49,7 +49,7 @@ sudo pip3 install -r requirements.txt
 
 7. handmatig start applicatie:
 ```
-python ./t65.py
+sudo python ./t65.py
 ```
 Sluit het af door ctrl+c.
 
