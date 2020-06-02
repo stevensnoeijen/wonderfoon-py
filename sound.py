@@ -12,8 +12,8 @@ class Sound:
     __playing = False
     repeat = False
 
-    def __init__(self, audio, file):
-        self.audio = audio
+    def __init__(self, player, file):
+        self.player = player
         self.file = file
 
     def play(self):
@@ -44,7 +44,7 @@ class Sound:
         wf = wave.open(self.file, 'rb')
 
         # open stream
-        stream = self.audio.open(format=self.audio.get_format_from_width(wf.getsampwidth()),
+        stream = self.player.open(format=self.player.get_format_from_width(wf.getsampwidth()),
                         channels=wf.getnchannels(),
                         rate=wf.getframerate(),
                         output=True)

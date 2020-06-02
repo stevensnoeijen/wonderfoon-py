@@ -26,12 +26,12 @@ class T65:
     def run(self):
         self.__loadConfigs()
 
-        self.audio = pyaudio.PyAudio()
+        self.player = pyaudio.PyAudio()
         # hacky solution, but in this way the console will only print the error once
-        for ii in range(self.audio.get_device_count()):
-            self.audio.get_device_info_by_index(ii)
+        for ii in range(self.player.get_device_count()):
+            self.player.get_device_info_by_index(ii)
 
-        self.__dailTone = Sound(self.audio, './music/kiestoon-2s.wav')
+        self.__dailTone = Sound(self.player, './music/kiestoon-2s.wav')
         self.__dailTone.repeat = True
 
         self.rotator = Rotator(
@@ -95,7 +95,7 @@ class T65:
         if self.__playingMusic:
             self.__playingMusic.stop()
 
-        self.__playingMusic = Sound(self.audio, 'music/' + song)
+        self.__playingMusic = Sound(self.player, 'music/' + song)
         self.__playingMusic.play()
     
     def stopMusic(self):
