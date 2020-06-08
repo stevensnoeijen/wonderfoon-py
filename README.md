@@ -1,10 +1,10 @@
 # wonderfoon-py
+> :warning: Dit project is in ontwikkeling :warning:
+
 Python implementatie voor wonderfoon.nl 1.4.
 
 Waarom Python? Omdat ik het project werkend wil krijgen op een pi zero en Python wil leren.
 Voor de audio gebruik ik: https://nl.aliexpress.com/item/32704994250.html
-
-__Dit project is in ontwikkeling__
 
 Ik ben niet de eigenaar van wonderfoon.nl, dit project is ge-forked op wonderfoon 1.4 en implementeerd de software in python.
 Zie http://wonderfoon.nl/
