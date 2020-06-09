@@ -1,7 +1,8 @@
 #!/bin/bash
 
-
 mount /dev/sda /mnt || mount /dev/sda1 /mnt || exit 0
+
+aplay music/usb-stick-detected.wav
 for f in action.json music.json volume.json config.json
 do
 	cp /mnt/$f /home/pi/wonderfoond-py
