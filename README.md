@@ -17,45 +17,49 @@ Zorg dat je Rasbian (Raspberry Pi OS) Lite (zonder desktop) hebt geinstalleerd: 
 
 Log in de terminal en voer de volgende stappen uit:
 
-1. installeer python3: https://wolfpaulus.com/raspberry-pi-zero-w-w-python-3/
+1. Pi specifiek:
+Open raspi-config `sudo raspi-config`.
 
-2. set python als default `alias python='/usr/bin/python3.4'`
+Stel audio jack in als default via `Advanced Options` > `A4 Audio` > `1 Headphones`.
 
-3. installeer os dependencies:
+Daarna selecteer de optie update.
+
+2. Zorg dat het os up to date is:
 ```
-sudo apt-get install -y python3-dev libasound2-dev
+sudo apt-get -y upgrade && sudo apt-get -y update
+```
 
+3. installeer dependencies: 
+
+```
+sudo apt-get install -y git python3-pip python3-dev libasound2-dev python3-gpiozero python-pyaudio python3-pyaudio ntfs-3g portaudio19-dev
 pip3 install --upgrade pip setuptools
 ```
 
-4. installeer git:
-```
-sudo apt-get update
-
-sudo apt-get install git
-```
-
-5. download code 
+4. download code 
 ```
 cd /home/pi/
 git clone https://github.com/stevensnoeijen/wonderfoon-py.git
+cd wonderfoon-py
+chmod +x t65.py run newstuff.sh
 ```
 
-6. installeer requirements: 
+5. installeer requirements: 
 ```
-cd wonderfoon-py
 sudo pip3 install -r requirements.txt
 ```
 
+6. stel config in `cp config.json-rotator config.json` 
+
 7. handmatig start applicatie:
 ```
-sudo python ./t65.py
+sudo python3 ./t65.py
 ```
 Sluit het af door ctrl+c.
 
-8. Automatisch starten van de applicatie bij het starten van de pi, open `sudo nano /etc/rc.local`.
+7. Automatisch starten van de applicatie bij het starten van de pi, open `sudo nano /etc/rc.local`.
 
-Voer boven de `exit 0` het volgende stukje code toe `rm -f nohup.out; nohup /home/pi/wonderfoond-py/run &`. 
+Voer boven de `exit 0` het volgende stukje code toe `rm -f nohup.out; nohup /home/pi/wonderfoon-py/run &`. 
 Dit zorgt ervoor dat het script `run` word uitgevoerd bij het starten van de pi.
 
 
@@ -79,7 +83,10 @@ Getest op rasberry pi zero 1.3.
 Todo: 
 
 - test usb met nieuwe muziek en json's
-- gebruikershandleiding maken 
+- test wav audio formats
+- fix volume naar 100%
+- dhcp uit newstuff.sh?
+- gebruikershandleiding maken
 - test handmatige installatie
 - maak automatische installatie script
 - implement mp3 & ogg
