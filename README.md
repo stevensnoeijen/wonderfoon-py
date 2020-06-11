@@ -44,20 +44,22 @@ cd wonderfoon-py
 chmod +x t65.py run newstuff.sh
 ```
 
-5. installeer requirements: 
+5. stel audio in volgens https://www.raspberrypi-spy.co.uk/2019/06/using-a-usb-audio-device-with-the-raspberry-pi/
+
+6. installeer requirements: 
 ```
 sudo pip3 install -r requirements.txt
 ```
 
-6. stel config in `cp config.json-rotator config.json` 
+7. stel config in `cp config.json-rotator config.json` 
 
-7. handmatig start applicatie:
+8. handmatig start applicatie:
 ```
 sudo python3 ./t65.py
 ```
 Sluit het af door ctrl+c.
 
-7. Automatisch starten van de applicatie bij het starten van de pi, open `sudo nano /etc/rc.local`.
+9. Automatisch starten van de applicatie bij het starten van de pi, open `sudo nano /etc/rc.local`.
 
 Voer boven de `exit 0` het volgende stukje code toe `rm -f nohup.out; nohup /home/pi/wonderfoon-py/run &`. 
 Dit zorgt ervoor dat het script `run` word uitgevoerd bij het starten van de pi.
