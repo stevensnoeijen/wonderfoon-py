@@ -31,7 +31,7 @@ class T65:
         for ii in range(self.player.get_device_count()):
             self.player.get_device_info_by_index(ii)
 
-        self.__dailTone = Sound(self.player, './music/kiestoon-2s.wav')
+        self.__dailTone = Sound(self.player, './music/kiestoon.wav')
         self.__dailTone.repeat = True
 
         self.rotator = Rotator(
