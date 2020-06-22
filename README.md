@@ -1,6 +1,4 @@
 # wonderfoon-py
-> :warning: Dit project is in ontwikkeling :warning:
-
 Python implementatie voor wonderfoon.nl 1.4.
 
 Waarom Python? Omdat ik het project werkend wil krijgen op een pi zero en Python wil leren.
@@ -8,6 +6,13 @@ Voor de audio gebruik ik: https://nl.aliexpress.com/item/32704994250.html
 
 Ik ben niet de eigenaar van wonderfoon.nl, dit project is ge-forked op wonderfoon 1.4 en implementeerd de software in python.
 Zie http://wonderfoon.nl/
+
+
+Limitaties:
+Alleen maar .wav files voor nu!
+Alleen rotator is geimplementeerd atm.
+
+Getest op rasberry pi zero 1.3.
 
 ## Handmatige installatie
 
@@ -21,6 +26,9 @@ Log in de terminal en voer de volgende stappen uit:
 Open raspi-config `sudo raspi-config`.
 
 Stel audio jack in als default via `Advanced Options` > `A4 Audio` > `1 Headphones`.
+Stel hostname in als 'wonderfoon'.
+
+
 
 Daarna selecteer de optie update.
 
@@ -64,6 +72,8 @@ Sluit het af door ctrl+c.
 Voer boven de `exit 0` het volgende stukje code toe `rm -f nohup.out; nohup /home/pi/wonderfoon-py/run &`. 
 Dit zorgt ervoor dat het script `run` word uitgevoerd bij het starten van de pi.
 
+10. Optioneel: zorg dat je pi sneller opstart met http://himeshp.blogspot.com/2018/08/fast-boot-with-raspberry-pi.html
+
 
 ## Development
 
@@ -72,23 +82,11 @@ Op de pi loopt een script om het python script te herstarten als het bestand wor
 
 `while inotifywait -e close_write t65.py; do python3 ./t65.py; done`
 
-Alleen rotator is geimplementeerd atm.
-Alleen wav 16bit is op het moment geimplementeerd.
-
 > install https://github.com/inotify-tools/inotify-tools/wiki
 
-limitations:
-Alleen maar .wav files voor nu!
-
-Getest op rasberry pi zero 1.3.
 
 Todo: 
 
-- test usb met nieuwe muziek en json's
-- test wav audio formats
-- fix volume naar 100%
-- dhcp uit newstuff.sh?
 - gebruikershandleiding maken
-- test handmatige installatie
 - maak automatische installatie script
 - implement mp3 & ogg
