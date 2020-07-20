@@ -40,7 +40,7 @@ sudo apt-get -y upgrade && sudo apt-get -y update
 3. installeer dependencies: 
 
 ```
-sudo apt-get install -y git python3-pip python3-dev libasound2-dev python3-gpiozero python-pyaudio python3-pyaudio ntfs-3g portaudio19-dev
+sudo apt-get install -y git python3-pip python3-dev libasound2-dev python3-gpiozero python-pyaudio python3-pyaudio ntfs-3g portaudio19-dev exfat-fuse exfat-utils
 pip3 install --upgrade pip setuptools
 ```
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mount /dev/sda /mnt || mount /dev/sda1 /mnt || exit 0
+mount /dev/sda /mnt || mount /dev/sda1 /mnt || mount -t exfat /dev/sda /mnt || mount -t exfat /dev/sda1 /mnt || mount -t ntfs /dev/sda /mnt || mount -t ntfs /dev/sda1 /mnt || exit 0
 
 aplay music/usb-stick-detected.wav
 for f in volume.json
